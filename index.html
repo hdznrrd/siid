@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>siid - shack interactive info display</title>
+
+<script type="text/javascript" src="lib/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="lib/raphael.js"></script>
+<script type="text/javascript" src="lib/g.raphael-min.js"></script>
+<script type="text/javascript" src="lib/g.bar-min.js"></script>
+<script type="text/javascript" src="lib/g.dot-min.js"></script>
+<script type="text/javascript" src="lib/g.line-min.js"></script>
+<script type="text/javascript" src="lib/g.pie-min.js"></script>
+
+<script type="text/javascript">
+var r = null;
+var c = [];
+var MAX_DATA_ITEMS = 500;
+var datay = [];
+var datax = [];
+
+var label 	= ["ID"		,"Total [kWh]"	,"??"		,"??"		,"U1 [V]"	,"U2 [V]"	,"U3 [V]"	,"I1 [A]"	,"I2 [A]"	,"I3 [A]"	,"P1 [W]"	,"P2 [W]"	,"P3 [W]"];
+var doPlot 	= [false	,false				  ,false	,false  ,false		,false		,false		,false		,false		,false		,true			,true			,true];
+
+function fetch() {
+	console.log("fetch");
+	$.get("//localhost:8000/cgi-bin/get.sh","",fetched,"html");
+}
+
+function fetched(data, textStatus, jqXHR) {
+	console.log("fetched");
+
+	var row = data.split("\n").slice(0,-9);
+	console.log(row)
+	if(row.length != label.length)
+	{
+		console.log("data length mismatch! row.length="+row.length+"  label.length="+label.length)
+	}
+	else
+	{
+
+		for(var i=0; i<row.length; i++)
+		{
+			if(!datay[i])
+			{
+				console.log("init "+label[i])
+				datay[i] = [];
+			}
+
+			datay[i].push( row[i].match(/\(([^\)\*]+)/)[1] );
+
+			if(datay[i].length > MAX_DATA_ITEMS)
+			{
+				console.log("truncated "+label[i])
+				datay[i].shift();
+			}
+		}
+			
+		if(datax.length < MAX_DATA_ITEMS)
+		{
+			datax.push(datay[0].length);
+		}
+
+		for(var i=0; i<c.length; i++) { if(c[i]) { c[i].remove() } }
+
+		var plotlabel = [];
+		var ploty = [];
+
+		for(var i=0; i<datay.length; i++)
+		{
+			if(doPlot[i])
+			{
+				console.log("plotting "+label[i])
+				ploty.push( datay[i] )
+				plotlabel.push( label[i] )
+			}
+		}
+
+		c[i] = r.linechart(0,0,1000,300,datax,ploty);
+	}
+	window.setTimeout(fetch,3000);
+}
+
+window.onload = function() {
+	r = new Raphael("holder");
+	fetch();
+}
+</script>
+
+</head>
+<body>
+<div id="holder"></div>
+</body>
+</html>
