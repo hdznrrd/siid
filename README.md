@@ -1,0 +1,2 @@
+# shackspace interactive info display
+
