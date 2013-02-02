@@ -1,0 +1,2 @@
+#!/bin/sh
+python -m CGIHTTPServer 8000 .
