@@ -1,4 +1,4 @@
-
+/// \brief limit the number of elements in an array by rotating out the oldest ones
 if(Array.prototype.rotateLimit == null)
 {
 	Array.prototype.rotateLimit = function(size)
@@ -7,6 +7,7 @@ if(Array.prototype.rotateLimit == null)
 	}
 }
 
+/// \brief access to the last element in an array
 if(Array.prototype.last == null)
 {
 	Array.prototype.last = function()
