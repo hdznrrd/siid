@@ -146,8 +146,8 @@ function fetch() {
 }
 
 
-function fetched(data, textStatus, jqXHR) {
-	console.log("fetched");
+function fetched(data) {
+	console.log("fetched: " + data);
 
 	var row = data.split("\n").slice(0,-9);
 	console.log(row)
