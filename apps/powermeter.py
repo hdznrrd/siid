@@ -1,6 +1,4 @@
 #!/usr/bin/python
-
-import web
 import redis
 import json
 
