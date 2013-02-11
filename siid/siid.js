@@ -23,6 +23,73 @@ if(Array.prototype.last == null)
 	}
 }
 
+
+function FakeOBIS()
+{
+	this._lastTime = new Date().getTime();
+	this._totalW = 36905.8247;
+	this._voltageBase = [230, 230, 230];
+	this._voltageSpread = [10, 10, 10];
+	this._currentBase = [11.21, 3.38, 5.42];
+	this._currentSpread = [0.3, 0.2, 0.11];
+
+	this.getNextRating = function( base, spread )
+	{
+		return $.map( base, function(e,i) { return parseFloat(e) + (Math.random()*parseFloat(spread[i])-parseFloat(spread[i])/2.0); });
+	}
+
+	this.getPowerRating = function( voltageRating, currentRating )
+	{
+		return $.map( voltageRating, function(e,i) { return parseFloat(e) * parseFloat(currentRating[i]); } );
+	}
+
+	this.getConsumptionIncrement = function( powerRating, deltaTime_h )
+	{
+		var sum = 0;
+		$.each( powerRating, function() { sum += parseFloat(this) || 0; } );
+		return sum * deltaTime_h;
+	}
+
+	this.getData = function()
+	{
+		var thisTime = new Date().getTime();
+		var deltaTime_h = (thisTime - this._lastTime) / 3600000;
+		this._lastTime = thisTime;
+
+		var vr = this.getNextRating( this._voltageBase, this._voltageSpread );
+		var cr = this.getNextRating( this._currentBase, this._currentSpread );
+		var pr = this.getPowerRating( vr, cr );
+		this._totalW += this.getConsumptionIncrement( pr, deltaTime_h );
+
+		var obis = "1-0:0.0.0*255(20745965)\n"
+		+ "1-0:1.8.0*255(" + this._totalW + ")\n"
+		+ "1-0:96.5.5*255(82)\n"
+		+ "0-0:96.1.255*255(0000120120)\n"
+		+ "1-0:32.7.0*255(" + vr[0].toFixed(2) + "*V)\n"
+		+ "1-0:52.7.0*255(" + vr[1].toFixed(2) + "*V)\n"
+		+ "1-0:72.7.0*255(" + vr[2].toFixed(2) + "*V)\n"
+		+ "1-0:31.7.0*255(" + cr[0].toFixed(2) + "*A)\n"
+		+ "1-0:51.7.0*255(" + cr[1].toFixed(2) + "*A)\n"
+		+ "1-0:71.7.0*255(" + cr[2].toFixed(2) + "*A)\n"
+		+ "1-0:21.7.0*255(+" + pr[0].toFixed(2) + "*W)\n"
+		+ "1-0:41.7.0*255(+" + pr[1].toFixed(2) + "*W)\n"
+		+ "1-0:61.7.0*255(+" + pr[2].toFixed(2) + "*W)\n"
+		+ "1-0:96.50.0*0(EF)\n"
+		+ "1-0:96.50.0*1(07D2)\n"
+		+ "1-0:96.50.0*2(0D)\n"
+		+ "1-0:96.50.0*3(01)\n"
+		+ "1-0:96.50.0*4(2C)\n"
+		+ "1-0:96.50.0*5(0A)\n"
+		+ "1-0:96.50.0*6(003D381B260A16F1F6FE560200009F80)\n"
+		+ "1-0:96.50.0*7(00)\n";
+
+		console.log("obis: " + obis);
+		return obis;
+	}
+}
+
+
+
 function calculateTimeAgo(arr, now)
 {
 		return arr.map( function(e) { return e-now } )
