@@ -12,6 +12,11 @@ function fetch() {
 function fetched(data) {
 	console.log("fetched: " + data);
 	
+	if(c)
+	{
+		c.remove()
+	}
+
 	c = r.linechart(50,0,1000,300,data["Time"],[data["L1.Power"],data["L2.Power"],data["L3.Power"]],{axis: "0 1 1 0"});
 /*
     c.labels = r.set();
