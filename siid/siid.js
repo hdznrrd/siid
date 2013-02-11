@@ -13,8 +13,8 @@ function fetched(data) {
 
 	c = r.linechart(0,
 									0,
-									$("#powergraph").width(),
-									$("#powergraph").height(),
+									$("#powergraph").width()-30,
+									$("#powergraph").height()-30,
 									data["Seconds ago"],
 									[
 										data["L1.Power"],
