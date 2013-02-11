@@ -13,7 +13,7 @@ function fetched(data) {
 	console.log("fetched: " + data);
 
 	
-	c = r.linechart(50,0,1000,300,data["Time"],[data["L1.Power","L2.Power","L3.Power"],{axis: "0 1 1 0"});
+	c = r.linechart(50,0,1000,300,data["Time"],[data["L1.Power"],data["L2.Power"],data["L3.Power"]],{axis: "0 1 1 0"});
 /*
     c.labels = r.set();
 		var x = 15; var h = 5;
