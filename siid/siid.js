@@ -5,7 +5,7 @@ var DELAY = 500;
 
 function fetch() {
 	console.log("fetch");
-	$.get("//siid/apps/powermeter.py","",fetched)
+	$.get("/siid/apps/powermeter.py","",fetched)
 }
 
 
