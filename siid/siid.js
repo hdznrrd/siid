@@ -24,6 +24,39 @@ if(Array.prototype.last == null)
 }
 
 
+/// \brief helper class to fetch data from the shackspace power meter
+/// \param timeout_ms timeout for async fetches, use 0 for infinite timeout
+/// \param cb_success function(data) called on successful finishing of a fetch
+/// \param cb_failure function() called on failure
+function PowermeterAsyncFetch(timeout_ms, cb_success, cb_failure)
+{
+	this._fake = true;
+
+	this._timeout_ms = timeout_ms;
+
+	this._cb_success = function(data) { if(cb_success) { cb_success(data); } };
+	this._cb_failure = function() { if(cb_failure) { cb_failure(); } };
+
+	this._fakeSrc = new FakeOBIS();
+
+	this.startFetch = function()
+	{
+		var self = this;
+
+		if(self._fake)
+		{
+			self._cb_success( self._fakeSrc.getData() );
+		}
+		else
+		{
+			$.get( "//localhost:8000/cgi-bin/get.sh", "", self._cb_success, "html", self._timeout_ms > 0 ? self._timeout_ms : undefined )
+				.error(	self._cb_failure );	
+		}
+	}
+}
+
+
+
 function FakeOBIS()
 {
 	this._lastTime = new Date().getTime();
@@ -101,7 +134,7 @@ var MAX_DATA_ITEMS = 500;
 var DELAY = 500;
 var datay = [];
 var datax = [];
-
+var pm = null;
 
 
 var label 	= ["ID"		,"Total [kWh]"	,"??"		,"??"		,"U1 [V]"	,"U2 [V]"	,"U3 [V]"	,"I1 [A]"	,"I2 [A]"	,"I3 [A]"	,"P1 [W]"	,"P2 [W]"	,"P3 [W]"];
@@ -109,7 +142,7 @@ var doPlot 	= [false	,false				  ,false	,false  ,false		,false		,false		,false		
 
 function fetch() {
 	console.log("fetch");
-	$.get("//localhost:8000/cgi-bin/get.sh","",fetched,"html");
+	pm.startFetch();
 }
 
 
@@ -181,5 +214,6 @@ function fetched(data, textStatus, jqXHR) {
 
 window.onload = function() {
 	r = new Raphael("holder");
+	pm = new PowermeterAsyncFetch(0,fetched,null);
 	fetch();
 }
