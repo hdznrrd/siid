@@ -17,7 +17,7 @@ function fetched(data) {
 		c.remove()
 	}
 
-	c = r.linechart(50,0,1000,300,data["Seconds ago"],[data["L1.Power"],data["L2.Power"],data["L3.Power"],[0]],{axis: "0 1 1 0"});
+	c = r.linechart(0,0,$("#powergraph").width,$("#powergraph").height,data["Seconds ago"],[data["L1.Power"],data["L2.Power"],data["L3.Power"],[0]],{axis: "0 1 1 0"});
 /*
     c.labels = r.set();
 		var x = 15; var h = 5;
@@ -37,6 +37,6 @@ function fetched(data) {
 }
 
 window.onload = function() {
-	r = new Raphael("holder");
+	r = new Raphael("powergraph");
 	fetch();
 }
