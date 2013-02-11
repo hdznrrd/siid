@@ -1,7 +1,7 @@
 
 var r = null;
 var c = null;
-var DELAY = 500;
+var DELAY = 2000;
 
 function fetch() {
 	console.log("fetch");
