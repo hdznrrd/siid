@@ -21,7 +21,9 @@ res = pipe.execute()
 
 output = {}
 
-output["Time"] = map(lambda kv: json.loads(kv)[0] , res[0])
+# convert time on the fly
+latest = json.loads(res[0][-1])[0]
+output["Seconds ago"] = map(lambda kv: json.loads(kv)[0]-latest , res[0])
 
 for idx, sensordata in enumerate(res):
 	output[sensors[idx]] = map(lambda kv: json.loads(kv)[1] , sensordata)
