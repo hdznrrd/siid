@@ -3,21 +3,28 @@ var r = null;
 var c = null;
 var DELAY = 2000;
 
-function fetch() {
-	console.log("fetch");
-	$.get("/siid/apps/powermeter.py","",fetched)
-}
-
+function fetch() { $.get("/siid/apps/powermeter.py","",fetched) }
 
 function fetched(data) {
-	console.log("fetched: " + data);
-	
 	if(c)
 	{
 		c.remove()
 	}
 
-	c = r.linechart(0,0,$("#powergraph").width,$("#powergraph").height,data["Seconds ago"],[data["L1.Power"],data["L2.Power"],data["L3.Power"],[0]],{axis: "0 1 1 0"});
+	c = r.linechart(0,
+									0,
+									$("#powergraph").width(),
+									$("#powergraph").height(),
+									data["Seconds ago"],
+									[
+										data["L1.Power"],
+										data["L2.Power"],
+										data["L3.Power"],
+										[0]
+									],
+									{axis: "0 1 1 0"}
+									);
+
 /*
     c.labels = r.set();
 		var x = 15; var h = 5;
