@@ -6,7 +6,7 @@ import json
 
 baseKey = "sensordata.shackspace.20745965.data."
 sensors = ["L1.Power","L2.Power","L3.Power"]
-numValues = 300
+numValues = 3000
 
 rc = redis.Redis("glados.shack")
 
