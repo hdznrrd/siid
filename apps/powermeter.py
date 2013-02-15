@@ -38,7 +38,7 @@ from operator import add
 													map(	add,
 																output[sensors[0]],
 																output[sensors[1]]),
-													output[sensor[2]]
+													output[sensors[2]]
 													)
 
 # off we go
