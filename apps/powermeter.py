@@ -1,10 +1,16 @@
 #!/usr/bin/python
 import redis
 import json
+import cgi;
 
 baseKey = "sensordata.shackspace.20745965.data."
 sensors = ["L1.Power","L2.Power","L3.Power"]
-numValues = 3000
+numValues = 500
+
+getp = cgi.FieldStorage();
+
+if "n" in getp:
+	numValues = getp["n"].value;
 
 rc = redis.Redis("glados.shack")
 
