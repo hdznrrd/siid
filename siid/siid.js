@@ -4,13 +4,10 @@ var c = null;
 var DELAY = 2000;
 
 function fetch() {
-	var n = $("#powergraph_duration").val();
-	console.log("duration: "+n)
-	$.get("/siid/apps/powermeter.py", "?n="+n, fetched)
+	$.get("/siid/apps/powermeter.py", { n: $("#powergraph_duration").val() }, fetched)
 }
 
 function fetched(data) {
-	console.log( "received data: " + data["Seconds ago"].length )
 	if(c)
 	{
 		c.remove()
