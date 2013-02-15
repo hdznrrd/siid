@@ -34,12 +34,7 @@ for idx, sensordata in enumerate(res):
 	output[sensors[idx]] = map(lambda kv: json.loads(kv)[1] , sensordata)
 
 from operator import add
-	output["Total"] = map(	add,
-													map(	add,
-																output[sensors[0]],
-																output[sensors[1]]),
-													output[sensors[2]]
-													)
+output["Total"] = map(	add, map(	add, output[sensors[0]], output[sensors[1]]), output[sensors[2]] )
 
 # off we go
 print "Content-Type: application/json"
