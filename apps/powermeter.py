@@ -1,4 +1,11 @@
 #!/usr/bin/python
+#
+# get the latest power consumption values from redis in JSON format
+# pass parameter ?n=<number> to control the number of items returned
+#
+# {"Total": [3734, ...], "Seconds ago": [0, ...], "L1.Power": [1612, ...], "L3.Power": [1363, ...], "L2.Power": [759, ...]}
+#
+
 import redis
 import json
 import cgi
