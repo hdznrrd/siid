@@ -22,11 +22,12 @@ function fetched(data) {
 										data["L1.Power"],
 										data["L2.Power"],
 										data["L3.Power"],
+										data["Total"],
 										[0]
 									],
 									{
 										axis: "0 1 1 0",
-										colors: ["#aa0000","#00aa00","#0000aa"]
+										colors: ["#aa0000","#00aa00","#0000aa","#aa00aa"]
 									}
 									);
 
