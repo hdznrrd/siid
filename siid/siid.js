@@ -26,6 +26,7 @@ function fetched(data) {
 									],
 									{
 										axis: "0 1 1 0",
+										colors: ["#ff0000","#00ff00","#0000ff"]
 									}
 									);
 
