@@ -11,7 +11,7 @@ numValues = 500
 
 
 if "n" in getp:
-	numValues = int(getp["n"].value);
+	numValues = int(getp["n"].value)
 
 rc = redis.Redis("glados.shack")
 
@@ -32,6 +32,14 @@ output["Seconds ago"] = map(lambda kv: json.loads(kv)[0]-latest , res[0])
 
 for idx, sensordata in enumerate(res):
 	output[sensors[idx]] = map(lambda kv: json.loads(kv)[1] , sensordata)
+
+from operator import add
+	output["Total"] = map(	add,
+													map(	add,
+																output[sensors[0]],
+																output[sensors[1]]),
+													output[sensor[2]]
+													)
 
 # off we go
 print "Content-Type: application/json"
