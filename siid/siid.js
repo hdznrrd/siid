@@ -26,11 +26,6 @@ function fetched(data) {
 									],
 									{
 										axis: "0 1 1 0",
-										colors: {
-											master: "#ff0000",
-											line1: "#00ff00",
-											line2: "#0000ff"
-										}
 									}
 									);
 
