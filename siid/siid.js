@@ -3,7 +3,9 @@ var r = null;
 var c = null;
 var DELAY = 2000;
 
-function fetch() { $.get("/siid/apps/powermeter.py", "",fetched) }
+function fetch() {
+	$.get("/siid/apps/powermeter.py", { "n" : $("powergraph_duration").val } ,fetched)
+}
 
 function fetched(data) {
 	if(c)
