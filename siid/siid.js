@@ -3,7 +3,7 @@ var r = null;
 var c = null;
 var DELAY = 2000;
 
-function fetch() { $.get("/siid/apps/powermeter.py", {n:20},fetched) }
+function fetch() { $.get("/siid/apps/powermeter.py", "",fetched) }
 
 function fetched(data) {
 	if(c)
