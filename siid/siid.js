@@ -24,7 +24,20 @@ function fetched(data) {
 										data["L3.Power"],
 										[0]
 									],
-									{axis: "0 1 1 0"}
+									{
+										axis: "0 1 1 0",
+										show_area: true,
+										no_grid: false,
+										colors: {
+											master: "#ff0000",
+											line1: "#00ff00",
+											line2: "#0000ff",
+										},
+										text: {
+            					font: "10px Helvetica, Arial",
+						        	fill: "#000000"
+										},
+									}
 									);
 
 /*
