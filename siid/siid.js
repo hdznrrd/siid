@@ -10,6 +10,7 @@ function fetch() {
 }
 
 function fetched(data) {
+	console.log( "received data: " + data["Seconds ago"].length() )
 	if(c)
 	{
 		c.remove()
