@@ -11,7 +11,7 @@ numValues = 500
 
 
 if "n" in getp:
-	numValues = getp["n"].value;
+	numValues = int(getp["n"].value);
 
 rc = redis.Redis("glados.shack")
 
