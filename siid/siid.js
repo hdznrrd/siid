@@ -26,35 +26,14 @@ function fetched(data) {
 									],
 									{
 										axis: "0 1 1 0",
-										show_area: true,
-										no_grid: false,
 										colors: {
 											master: "#ff0000",
 											line1: "#00ff00",
-											line2: "#0000ff",
-										},
-										text: {
-            					font: "10px Helvetica, Arial",
-						        	fill: "#000000"
-										},
+											line2: "#0000ff"
+										}
 									}
 									);
 
-/*
-    c.labels = r.set();
-		var x = 15; var h = 5;
-		for( var i = 0; i < plotlabel.length; ++i )
-		{
-			var clr = c.lines[i].attr("stroke");
-			c.labels.push(r.set());
-			//c.labels[i].push(r.g["disc"](x + 5, h, 5)
-			//										 .attr({fill: clr, stroke: "none"}));
-			c.labels[i].push(txt = r.text(x + 20, h, plotlabel[i])
-													 .attr(r.g.txtattr)
-													 .attr({fill: "#000", "text-anchor": "start"}));
-			x += c.labels[i].getBBox().width * 1.2;
-		}
-		*/
 	window.setTimeout(fetch,DELAY);
 }
 
