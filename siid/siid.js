@@ -37,7 +37,7 @@ function fetched_powermeter(data) {
 }
 
 function fetch_powermeter_datacenter() {
-	$.get("/siid/apps/powermeter_datacenter.py", { n: $("#powergraph_duration").val() * 2 }, fetched_powermeter_datacenter)
+	$.get("/siid/apps/powermeter_datacenter.py", { n: Math.ceil( $("#powergraph_duration").val() / 2) }, fetched_powermeter_datacenter)
 }
 
 function fetched_powermeter_datacenter(data) {
