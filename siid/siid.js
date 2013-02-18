@@ -34,7 +34,8 @@ function fetched(data) {
 	window.setTimeout(fetch,DELAY);
 }
 
-window.onload = function() {
-	r = new Raphael("powergraph");
+
+function siid_start() {
+	r = new Raphael("powergraph_total");
 	fetch();
 }
