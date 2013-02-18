@@ -12,8 +12,7 @@ import cgi
 
 getp = cgi.FieldStorage();
 
-baseKey = "sensordata.shackspace.zaehler_rz_001.data."
-sensors = ["Power"]
+baseKey = "sensordata.shackspace.zaehler_rz_001.data.Power"
 numValues = 500
 
 
@@ -23,7 +22,7 @@ if "n" in getp:
 rc = redis.Redis("glados.shack")
 
 # get the numValues latest values
-res = rc.lrange(baseKey+sensor, -numValues, -1)
+res = rc.lrange(baseKey, -numValues, -1)
 
 output = {}
 
