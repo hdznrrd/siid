@@ -76,6 +76,8 @@
 						<div class="control-group">
 						<label class="control-label" for="powergraph_duration">Duration</label>
 						<div class="controls">
+						  <select data-bind="options: selectPowergraphDurationOptions, optionsText: selectPowergraphDurationOptionsText, value: selectPowergraphDurationSelectedValue"></select>
+							<!--
 							<select id="powergraph_duration">
 								<option value="15">0.5 min</option>
 								<option value="30">1 min</option>
@@ -86,6 +88,7 @@
 								<option value="5400">3 h</option>
 								<option value="10800">6 h</option>
 							</select>
+							-->
 						</div>
 						</div>
 					</div>
@@ -115,6 +118,7 @@
 		<script type="text/javascript" src="lib/g.dot-min.js"></script>
 		<script type="text/javascript" src="lib/g.line-min.js"></script>
 		<script type="text/javascript" src="lib/g.pie-min.js"></script>
+		<script type='text/javascript' src='lib/knockout-2.2.1.js'></script>
 
 		<script type="text/javascript" src="siid/siid.js"></script>
 
