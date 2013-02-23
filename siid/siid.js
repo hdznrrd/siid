@@ -19,7 +19,7 @@ function fetched_powermeter(data) {
 									0,
 									$("#powergraph_total").width()-30,
 									$("#powergraph_total").height()-30,
-									data["Seconds ago"],
+									data["Minutes ago"],
 									[
 										data["L1.Power"],
 										data["L2.Power"],
@@ -50,7 +50,7 @@ function fetched_powermeter_datacenter(data) {
 									0,
 									$("#powergraph_datacenter_only").width()-30,
 									$("#powergraph_datacenter_only").height()-30,
-									data["Seconds ago"],
+									data["Minutes ago"],
 									[
 										data["Total"],
 										[0]

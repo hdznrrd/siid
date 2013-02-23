@@ -3,7 +3,7 @@
 # get the latest power consumption values from redis in JSON format
 # pass parameter ?n=<number> to control the number of items returned
 #
-# {"Total": [3734, ...], "Seconds ago": [0, ...], "L1.Power": [1612, ...], "L3.Power": [1363, ...], "L2.Power": [759, ...]}
+# {"Total": [3734, ...], "Minutes ago": [0, ...], "L1.Power": [1612, ...], "L3.Power": [1363, ...], "L2.Power": [759, ...]}
 #
 
 import redis
@@ -35,7 +35,7 @@ output = {}
 
 # convert time on the fly
 latest = json.loads(res[0][-1])[0]
-output["Seconds ago"] = map(lambda kv: json.loads(kv)[0]-latest , res[0])
+output["Minutes ago"] = map(lambda kv: (json.loads(kv)[0]-latest)/60000 , res[0])
 
 for idx, sensordata in enumerate(res):
 	output[sensors[idx]] = map(lambda kv: json.loads(kv)[1] , sensordata)

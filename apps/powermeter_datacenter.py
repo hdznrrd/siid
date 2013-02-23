@@ -3,7 +3,7 @@
 # get the latest power consumption values from redis in JSON format
 # pass parameter ?n=<number> to control the number of items returned
 #
-# {"Total": [3734, ...], "Seconds ago": [0, ...] }
+# {"Total": [3734, ...], "Minutes ago": [0, ...] }
 #
 
 import redis
@@ -28,7 +28,7 @@ output = {}
 
 # convert time on the fly
 latest = json.loads(res[-1])[0]
-output["Seconds ago"] = map(lambda kv: json.loads(kv)[0]-latest , res)
+output["Minutes ago"] = map(lambda kv: (json.loads(kv)[0]-latest)/60000 , res)
 output["Total"] = map(lambda kv: json.loads(kv)[1] , res)
 
 # off we go
