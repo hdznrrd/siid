@@ -31,10 +31,10 @@ function fetched_powermeter(data) {
 		c.remove()
 	}
 
-	powergraphViewModel.pgTotal_Total = data["Total"][-1];
-	powergraphViewModel.pgTotal_L1 = data["L1.Power"][-1];
-	powergraphViewModel.pgTotal_L2 = data["L2.Power"][-1];
-	powergraphViewModel.pgTotal_L3 = data["L3.Power"][-1];
+	powergraphViewModel.pgTotal_Total(data["Total"][-1]);
+	powergraphViewModel.pgTotal_L1(data["L1.Power"][-1]);
+	powergraphViewModel.pgTotal_L2(data["L2.Power"][-1]);
+	powergraphViewModel.pgTotal_L3(data["L3.Power"][-1]);
 
 	c = r.linechart(0,
 									0,
@@ -69,7 +69,7 @@ function fetched_powermeter_datacenter(data) {
 		c_datacenter.remove()
 	}
 
-	powergraphViewModel.pgDatacenter_Total = data["Total"][-1];
+	powergraphViewModel.pgDatacenter_Total(data["Total"][-1]);
 
 	c_datacenter = r_datacenter.linechart(0,
 									0,
