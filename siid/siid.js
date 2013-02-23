@@ -10,11 +10,11 @@ var powergraphViewModel = {
 	selDurationOptionsText: ["0.5 min",	"1 min", 	"5 min",	"10 min", "0.5 h",	"1 h",	"3 h", 	"6 h"],
 	selDurationSelectedValue: ko.observable(900),
 
-	pgTotal_Total: ko.observable(0),
-	pgTotal_L1: ko.observable(0),
-	pgTotal_L2: ko.observable(0),
-	pgTotal_L3: ko.observable(0),
-	pgDatacenter_Total: ko.observable(0),
+//	pgTotal_Total: ko.observable(0),
+//	pgTotal_L1: ko.observable(0),
+//	pgTotal_L2: ko.observable(0),
+//	pgTotal_L3: ko.observable(0),
+//	pgDatacenter_Total: ko.observable(0),
 }
 
 
