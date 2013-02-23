@@ -6,15 +6,17 @@ var c_datacenter = null;
 var DELAY = 2000;
 
 var powergraphViewModel = {
-selectPowergraphDurationOptions: 		[15, 				30, 			150, 			300, 			9000, 		1800, 	5400, 	10800],
-selectPowergraphDurationOptionsText: ["0.5 min",	"1 min", 	"5 min",	"10 min", "0.5 h",	"1 h",	"3 h", 	"6 h"],
-selectPowergraphDurationSelectedValue: ko.observable(900),
+	selDurationOptions: 		[15, 				30, 			150, 			300, 			9000, 		1800, 	5400, 	10800],
+	selDurationOptionsText: ["0.5 min",	"1 min", 	"5 min",	"10 min", "0.5 h",	"1 h",	"3 h", 	"6 h"],
+	selDurationSelectedValue: ko.observable(900),
 }
 
 
 
 function fetch_powermeter() {
-	$.getJSON("/siid/apps/powermeter.py", { n: powergraphViewModel.selectPowergraphDurationSelectedValue }, fetched_powermeter)
+	$.getJSON("/siid/apps/powermeter.py",
+		{ n: powergraphViewModel.selDurationSelectedValue },
+		fetched_powermeter )
 }
 
 function fetched_powermeter(data) {
@@ -45,7 +47,9 @@ function fetched_powermeter(data) {
 }
 
 function fetch_powermeter_datacenter() {
-	$.getJSON("/siid/apps/powermeter_datacenter.py", { n: Math.ceil( powergraphViewModel.selectPowergraphDurationSelectedValue / 2.0) }, fetched_powermeter_datacenter)
+	$.getJSON("/siid/apps/powermeter_datacenter.py",
+		{ n: Math.ceil( parseInt(powergraphViewModel.selDurationSelectedValue) / 2 ) },
+		fetched_powermeter_datacenter )
 }
 
 function fetched_powermeter_datacenter(data) {
