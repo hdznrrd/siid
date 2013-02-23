@@ -6,9 +6,9 @@ var c_datacenter = null;
 var DELAY = 2000;
 
 var powergraphViewModel = {
-selectPowergraphDurationOptions = 		[15, 				30, 			150, 			300, 			9000, 		1800, 	5400, 	10800],
-selectPowergraphDurationOptionsText = ["0.5 min",	"1 min", 	"5 min",	"10 min", "0.5 h",	"1 h",	"3 h", 	"6 h"],
-selectPowergraphDurationSelectedValue = ko.observable(900),
+selectPowergraphDurationOptions: 		[15, 				30, 			150, 			300, 			9000, 		1800, 	5400, 	10800],
+selectPowergraphDurationOptionsText: ["0.5 min",	"1 min", 	"5 min",	"10 min", "0.5 h",	"1 h",	"3 h", 	"6 h"],
+selectPowergraphDurationSelectedValue: ko.observable(900),
 }
 
 
