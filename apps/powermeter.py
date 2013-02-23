@@ -35,7 +35,7 @@ output = {}
 
 # convert time on the fly
 latest = json.loads(res[0][-1])[0]
-output["Minutes ago"] = map(lambda kv: (json.loads(kv)[0]-latest)/60000 , res[0])
+output["Minutes ago"] = map(lambda kv: (json.loads(kv)[0]-latest)/60000.0 , res[0])
 
 for idx, sensordata in enumerate(res):
 	output[sensors[idx]] = map(lambda kv: json.loads(kv)[1] , sensordata)
