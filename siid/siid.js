@@ -6,7 +6,7 @@ var c_datacenter = null;
 var DELAY = 2000;
 
 function fetch_powermeter() {
-	$.get("/siid/apps/powermeter.py", { n: $("#powergraph_duration").val() }, fetched_powermeter)
+	$.getJSON("/siid/apps/powermeter.py", { n: $("#powergraph_duration").val() }, fetched_powermeter)
 }
 
 function fetched_powermeter(data) {
@@ -37,7 +37,7 @@ function fetched_powermeter(data) {
 }
 
 function fetch_powermeter_datacenter() {
-	$.get("/siid/apps/powermeter_datacenter.py", { n: Math.ceil( $("#powergraph_duration").val() / 2) }, fetched_powermeter_datacenter)
+	$.getJSON("/siid/apps/powermeter_datacenter.py", { n: Math.ceil( $("#powergraph_duration").val() / 2) }, fetched_powermeter_datacenter)
 }
 
 function fetched_powermeter_datacenter(data) {
