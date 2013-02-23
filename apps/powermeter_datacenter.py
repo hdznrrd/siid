@@ -28,7 +28,7 @@ output = {}
 
 # convert time on the fly
 latest = json.loads(res[-1])[0]
-output["Minutes ago"] = map(lambda kv: (json.loads(kv)[0]-latest)/60000 , res)
+output["Minutes ago"] = map(lambda kv: (json.loads(kv)[0]-latest)/60000.0 , res)
 output["Total"] = map(lambda kv: json.loads(kv)[1] , res)
 
 # off we go
