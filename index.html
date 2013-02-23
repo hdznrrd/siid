@@ -79,18 +79,6 @@
 						  <select data-bind="	options: selDurationOptions,
 																	optionsText: selDurationOptionsText,
 																	value: selDurationSelectedValue"></select>
-							<!--
-							<select id="powergraph_duration">
-								<option value="15">0.5 min</option>
-								<option value="30">1 min</option>
-								<option value="150">5 min</option>
-								<option value="300">10 min</option>
-								<option value="900" selected>0.5 h</option>
-								<option value="1800">1 h</option>
-								<option value="5400">3 h</option>
-								<option value="10800">6 h</option>
-							</select>
-							-->
 						</div>
 						</div>
 					</div>
@@ -99,6 +87,7 @@
 			<div class="row-fluid">
 				<div class="span6">
 					<h2>Total</h2>
+					Total: <span data-bind="text: pgTotal_Total"/> W, (L1,L2,L3) = (<span data-bind="text: pgTotal_L1"/>,<span data-bind="text: pgTotal_L2"/>,<span data-bind="text: pgTotal_L3"/>) W
 					<div id="powergraph_total" class="display-area"></div>
 				</div>
 				<div class="span6">

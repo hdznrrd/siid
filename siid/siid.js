@@ -9,6 +9,12 @@ var powergraphViewModel = {
 	selDurationOptions: 		[15, 				30, 			150, 			300, 			9000, 		1800, 	5400, 	10800],
 	selDurationOptionsText: ["0.5 min",	"1 min", 	"5 min",	"10 min", "0.5 h",	"1 h",	"3 h", 	"6 h"],
 	selDurationSelectedValue: ko.observable(900),
+
+	pgTotal_Total: ko.observable(0),
+	pgTotal_L1: ko.observable(0),
+	pgTotal_L2: ko.observable(0),
+	pgTotal_L3: ko.observable(0),
+	pgDatacenter_Total: ko.observable(0),
 }
 
 
@@ -24,6 +30,11 @@ function fetched_powermeter(data) {
 	{
 		c.remove()
 	}
+
+	powergraphViewModel.pgTotal_Total = data["Total"][-1];
+	powergraphViewModel.pgTotal_L1 = data["L1.Power"][-1];
+	powergraphViewModel.pgTotal_L2 = data["L2.Power"][-1];
+	powergraphViewModel.pgTotal_L3 = data["L3.Power"][-1];
 
 	c = r.linechart(0,
 									0,
@@ -57,6 +68,8 @@ function fetched_powermeter_datacenter(data) {
 	{
 		c_datacenter.remove()
 	}
+
+	powergraphViewModel.pgDatacenter_Total = data["Total"][-1];
 
 	c_datacenter = r_datacenter.linechart(0,
 									0,
