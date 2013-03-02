@@ -121,24 +121,60 @@
 		<script type="text/javascript" src="siid/siid.js"></script>
 
 		<script type="text/javascript">
-			function resizeDisplayAreas() {
-				var hash = window.location.hash;
+			// container_id: id of container without hash mark
+			// show_fn: function called when showing a page
+			// hide_fn: function called when hiding a page
+			function SiidPage(page_id,container_id, show_fn, hide_fn) 
+			{
+				page_id = page_id
+				container_id = container_id;
+				show = show_fn;
+				hide = hide_fn;
+			}
 
-				setInterval( function() {
-					if(hash != window.location.hash) {
-						hash = window.location.hash;
-						
-						$("*[id\^='visibility-container-\_']").each(
-							function(element) {
-								element.css("display","none")
-							}
-						)
+			// the page core class that handles all pages
+			function PageCore()
+			{
+				pages = {};
+				current_page_id = null;
 
-						$("#visibility-container-"+hash).css("display","block")
+				// register a new page
+				register = function(siidpage) {
+					pages[siidpage.page_id] = siidpage;
+				}
+
+				// execute a function fn = function(element){} for each link to a certain subpage
+				function forAllLinksTo(page_id, fn)
+				{
+					$.each($('a[href="#'+page_id+'"]'), fn)
+				}
+
+				// switch to a new page
+				switchTo = function(page_id)	{
+					if(current_page_id)
+					{
+						$("#"+current_page_id).css("visibility","none")
+						forAllLinksTo(current_page_id, function(e) { e.removeClass('active') })
+						pages[current_page_id].hide()
 					}
-				}, 1000 )
 
+					if(pages[page_id])
+					{
+						pages[page_id].show()
+						forAllLinksTo(page_id, function(e) { e.addClass('active') })
+						$("#"+page_id).css("visibility","block")
+						
+						current_page_id = page_id;
+					}
+					else
+					{
+						current_page_id = null;
+					}
+				}
+			}
 
+			// resize all display areas to a 0.5 aspect	
+			function resizeDisplayAreas() {
 				var display_area_aspect = 0.5;
 
 				$(".display-area").each( function() {
@@ -146,11 +182,34 @@
 				})
 			}
 
+			var pagecore = new PageCore();
+			var hash = window.location.hash;
+
 			window.onload = function() {
 				siid_start();
 
 				$(window).resize( resizeDisplayAreas );
 				resizeDisplayAreas();
+
+				pagecore.register(
+					new SiidPage(
+						"power",
+						"visibility-container-power",
+						function() {},
+						function() {}
+					)
+				)
+
+				// show the first page
+				pagecore.switchTo("power")
+
+				// track if the hash url part changes
+				setInterval( function() {
+					if(hash != window.location.hash) {
+						hash = window.location.hash;
+						pagecore.switchTo(hash.substr(1));
+					}
+				}, 1000 )
 
 			}
 		</script>
