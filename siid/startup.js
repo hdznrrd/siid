@@ -7,13 +7,13 @@ window.onload = function() {
 	$(window).resize( resizeDisplayAreas );
 	resizeDisplayAreas();
 
-	var pages = [
+	 ;
+
+	$.each([
 		new SiidPage("power", "visibility-container-power", null, null),
 		new SiidPage("network", "visibility-container-network", null, null),
 		new SiidPage("social", "visibility-container-social", null, null),
-	];
-
-	$.each(pages, function(p) {
+	], function(i,p) {
 		pagecore.register(p)
 	})
 
