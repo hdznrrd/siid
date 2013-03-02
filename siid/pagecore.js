@@ -44,7 +44,7 @@
 
 				// hide a page
 				function hidePage(page_id) {
-					if(getPage(page_id) {
+					if(getPage(page_id)) {
 						// hide the container
 						$("#"+ getPage(page_id).getContainerId() ).css("visibility","none")
 						// execute the hide function hook
@@ -57,7 +57,7 @@
 
 				// show a page
 				function showPage(page_id) {
-					if(getPage(page_id) {
+					if(getPage(page_id)) {
 						// execute the show function hook
 						getPage(page_id).show()
 						// update links
