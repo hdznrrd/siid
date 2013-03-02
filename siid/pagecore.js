@@ -39,7 +39,7 @@
 				// execute a function fn = function(element) for each link to a certain subpage
 				function forAllLinksTo(page_id, fn)
 				{
-					$.each($('a[href="#'+page_id+'"]'), fn)
+					$.each($('a[href="#'+page_id+'"]'), function(i,e){fn(e.parent())})
 				}
 
 				// hide a page
@@ -50,7 +50,7 @@
 						// execute the hide function hook
 						getPage(page_id).hide()
 						// update links
-						forAllLinksTo(page_id, function(i,e) { e.removeClass('active') })
+						forAllLinksTo(page_id, function(e) { e.removeClass('active') })
 						current_page_id = null;
 					}
 				}
@@ -61,7 +61,7 @@
 						// execute the show function hook
 						getPage(page_id).show()
 						// update links
-						forAllLinksTo(page_id, function(i,e) { e.addClass('active') })
+						forAllLinksTo(page_id, function(e) { e.addClass('active') })
 						// show the container
 						$("#"+ getPage(page_id).getContainerId() ).css("visibility","block")
 						current_page_id = page_id;
