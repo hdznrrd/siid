@@ -17,11 +17,12 @@ window.onload = function() {
 		pagecore.register(p)
 	})
 
-	// show the first page
-	pagecore.switchTo("power")
-
 	// track if the hash url part changes
 	setInterval( function() {
+		if(window.location.hash == ""){
+			window.location.hash = "#power";
+		}
+
 		if(hash != window.location.hash) {
 			hash = window.location.hash;
 			pagecore.switchTo(hash.substr(1));
