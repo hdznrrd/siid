@@ -8,11 +8,9 @@ window.onload = function() {
 	resizeDisplayAreas();
 
 	pagecore.register(
-		new SiidPage(
-			"power",
-			"visibility-container-power",
-			null, null
-		)
+		new SiidPage("power", "visibility-container-power", null, null),
+		new SiidPage("network", "visibility-container-network", null, null),
+		new SiidPage("social", "visibility-container-social", null, null),
 	)
 
 	// show the first page
