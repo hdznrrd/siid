@@ -128,18 +128,21 @@
 			{
 				page_id = page_id
 				container_id = container_id;
-				show = show_fn;
-				hide = hide_fn;
+				show_fn = show_fn;
+				hide_fn = hide_fn;
+
+				this.show = function() { if(show_fn) { show_fn() } }
+				this.hide = function() { if(hide_fn) { hide_fn() } }
 			}
 
 			// the page core class that handles all pages
 			function PageCore()
 			{
-				pages = {};
-				current_page_id = null;
+				var pages = {};
+				var current_page_id = null;
 
 				// register a new page
-				register = function(siidpage) {
+				this.register = function(siidpage) {
 					pages[siidpage.page_id] = siidpage;
 				}
 
@@ -149,11 +152,21 @@
 					$.each($('a[href="#'+page_id+'"]'), fn)
 				}
 
+				// hide a page
+				function hidePage(page_id) {
+					$("#"+this.current_page_id).css("visibility","none")
+				}
+
+				// show a page
+				function showPage(page_id) {
+					$("#"+page_id).css("visibility","block")
+				}
+
 				// switch to a new page
-				switchTo = function(page_id)	{
+				this.switchTo = function(page_id)	{
 					if(current_page_id)
 					{
-						$("#"+current_page_id).css("visibility","none")
+						hidePage(current_page_id)
 						forAllLinksTo(current_page_id, function(e) { e.removeClass('active') })
 						pages[current_page_id].hide()
 					}
@@ -162,7 +175,7 @@
 					{
 						pages[page_id].show()
 						forAllLinksTo(page_id, function(e) { e.addClass('active') })
-						$("#"+page_id).css("visibility","block")
+						showPage(page_id)
 						
 						current_page_id = page_id;
 					}
@@ -195,8 +208,7 @@
 					new SiidPage(
 						"power",
 						"visibility-container-power",
-						function() {},
-						function() {}
+						null, null
 					)
 				)
 
