@@ -46,7 +46,7 @@
 				function hidePage(page_id) {
 					if(getPage(page_id)) {
 						// hide the container
-						$("#"+ getPage(page_id).getContainerId() ).css("visibility","none")
+						$("#"+ getPage(page_id).getContainerId() ).css("display","none")
 						// execute the hide function hook
 						getPage(page_id).hide()
 						// update links
@@ -63,7 +63,7 @@
 						// update links
 						forLinkTo(page_id, function(e) { e.addClass('active') })
 						// show the container
-						$("#"+ getPage(page_id).getContainerId() ).css("visibility","block")
+						$("#"+ getPage(page_id).getContainerId() ).css("display","block")
 						current_page_id = page_id;
 					}
 				}
