@@ -8,6 +8,8 @@
 				show_fn = show_fn;
 				hide_fn = hide_fn;
 
+				this.getPageId = function() { return page_id }
+				this.getContainerId = function() { return container_id }
 				this.show = function() { if(show_fn) { show_fn() } }
 				this.hide = function() { if(hide_fn) { hide_fn() } }
 			}
@@ -20,10 +22,21 @@
 
 				// register a new page
 				this.register = function(siidpage) {
-					pages[siidpage.page_id] = siidpage;
+					pages[siidpage.getPageId()] = siidpage;
 				}
 
-				// execute a function fn = function(element){} for each link to a certain subpage
+				// switch to a new page
+				this.switchTo = function(page_id)	{
+					hidePage(current_page_id)
+					showPage(page_id)
+				}
+
+				function getPage(page_id)
+				{
+					return pages[page_id]
+				}
+
+				// execute a function fn = function(element) for each link to a certain subpage
 				function forAllLinksTo(page_id, fn)
 				{
 					$.each($('a[href="#'+page_id+'"]'), fn)
@@ -31,36 +44,30 @@
 
 				// hide a page
 				function hidePage(page_id) {
-					$("#"+this.current_page_id).css("visibility","none")
+					if(getPage(page_id) {
+						// hide the container
+						$("#"+ getPage(page_id).getContainerId() ).css("visibility","none")
+						// execute the hide function hook
+						getPage(page_id).hide()
+						// update links
+						forAllLinksTo(page_id, function(e) { e.removeClass('active') })
+						current_page_id = null;
+					}
 				}
 
 				// show a page
 				function showPage(page_id) {
-					$("#"+page_id).css("visibility","block")
-				}
-
-				// switch to a new page
-				this.switchTo = function(page_id)	{
-					if(current_page_id)
-					{
-						hidePage(current_page_id)
-						forAllLinksTo(current_page_id, function(e) { e.removeClass('active') })
-						pages[current_page_id].hide()
-					}
-
-					if(pages[page_id])
-					{
-						pages[page_id].show()
+					if(getPage(page_id) {
+						// execute the show function hook
+						getPage(page_id).show()
+						// update links
 						forAllLinksTo(page_id, function(e) { e.addClass('active') })
-						showPage(page_id)
-						
+						// show the container
+						$("#"+ getPage(page_id).getContainerId() ).css("visibility","block")
 						current_page_id = page_id;
 					}
-					else
-					{
-						current_page_id = null;
-					}
 				}
+
 			}
 
 			// resize all display areas to a 0.5 aspect	
