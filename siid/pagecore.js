@@ -27,7 +27,7 @@
 
 				// switch to a new page
 				this.switchTo = function(page_id)	{
-					hidePage(current_page_id)
+					$.each(pages,function(i,e) { hidePage(e.getPageId())})
 					showPage(page_id)
 				}
 
