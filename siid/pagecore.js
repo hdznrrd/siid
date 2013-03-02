@@ -39,7 +39,10 @@
 				// execute a function fn = function(element) for each link to a certain subpage
 				function forAllLinksTo(page_id, fn)
 				{
-					$.each($('a[href="#'+page_id+'"]'), function(i,e){fn(e.parent())})
+					$.each($('a[href$="#'+page_id+'"]'),
+					function(i,e){
+					fn(e.parent())
+					})
 				}
 
 				// hide a page
