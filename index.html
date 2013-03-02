@@ -58,51 +58,53 @@
       </div>
     </div>
 
-    <div class="container-fluid">
-			<div class="row-fluid">
-				<div class="span12" id="area_error">
-					<div class="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Warning!</strong> This is beta. LOL :)
-					</div>
-				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span8">
-					<h1>Power Consumption</h1>
-				</div>
-				<div class="span4">
-					<div class="form-horizontal">
-						<div class="control-group">
-						<label class="control-label" for="powergraph_duration">Duration</label>
-						<div class="controls">
-							<select id="powergraph_duration">
-								<option value="15">0.5 min</option>
-								<option value="30">1 min</option>
-								<option value="150">5 min</option>
-								<option value="300">10 min</option>
-								<option value="900" selected>0.5 h</option>
-								<option value="1800">1 h</option>
-								<option value="5400">3 h</option>
-								<option value="10800">6 h</option>
-							</select>
-						</div>
+		<!-- ===================== POWER ===================== -->
+		<div id="visibility-container-power">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12" id="area_error">
+						<div class="alert">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong>Warning!</strong> This is beta. LOL :)
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span6">
-					<h2>Total</h2>
-					<div id="powergraph_total" class="display-area"></div>
+				<div class="row-fluid">
+					<div class="span8">
+						<h1>Power Consumption</h1>
+					</div>
+					<div class="span4">
+						<div class="form-horizontal">
+							<div class="control-group">
+							<label class="control-label" for="powergraph_duration">Duration</label>
+							<div class="controls">
+								<select id="powergraph_duration">
+									<option value="15">0.5 min</option>
+									<option value="30">1 min</option>
+									<option value="150">5 min</option>
+									<option value="300">10 min</option>
+									<option value="900" selected>0.5 h</option>
+									<option value="1800">1 h</option>
+									<option value="5400">3 h</option>
+									<option value="10800">6 h</option>
+								</select>
+							</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="span6">
-					<h2>Datacenter Only</h2>
-					<div id="powergraph_datacenter_only" class="display-area"></div>
+				<div class="row-fluid">
+					<div class="span6">
+						<h2>Total</h2>
+						<div id="powergraph_total" class="display-area"></div>
+					</div>
+					<div class="span6">
+						<h2>Datacenter Only</h2>
+						<div id="powergraph_datacenter_only" class="display-area"></div>
+					</div>
 				</div>
-			</div>
-    </div> <!-- /container -->
-
+			</div> <!-- /container -->
+		</div
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -120,6 +122,22 @@
 
 		<script type="text/javascript">
 			function resizeDisplayAreas() {
+				var hash = window.location.hash;
+
+				setInterval( function() {
+					if(hash != window.location.hash) {
+						hash = window.location.hash;
+						
+						$("*[id\^='visibility-container-\_']").each(
+							function(element) {
+								element.css("display","none")
+							}
+						)
+
+						$("#visibility-container-"+hash).css("display","block")
+					}
+				}, 1000 )
+
 
 				var display_area_aspect = 0.5;
 
