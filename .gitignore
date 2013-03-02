@@ -1,2 +1,4 @@
 nohup.out
 server.sh
+apps/cgi-bin
+apps/test.py
